@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-    font-family: "Manrope", sans-serif;
+    font-family: 'Manrope', sans-serif;
     background-color: #121212;
     color: #e0e0e0;
     margin: 0;
@@ -43,6 +43,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: 'Manrope', sans-serif;
 }
 
 button:hover {
