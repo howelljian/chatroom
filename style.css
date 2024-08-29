@@ -78,3 +78,57 @@ button:hover {
 .chat-input input {
     margin-bottom: 10px;
 }
+
+.chat-input input[type="text"] {
+    width: 60%; /* Adjust this percentage to make the input field wider */
+    height: 5%;
+    padding: 10px; /* Add some padding for a better look */
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px; /* Adjust font size if needed */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+.chat-messages {
+    width: 90%; /* Adjust this percentage or use a fixed width like 500px */
+    margin: 0 auto; /* Center the messages container */
+    padding: 10px; /* Optional: Add some padding for better appearance */
+    max-height: 400px; /* Optional: Set a max height if needed */
+    overflow-y: auto; /* Add a scrollbar if the content exceeds the height */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+    font-family: 'Manrope', sans-serif; /* Apply the Manrope font */
+    font-size: 16px; /* Adjust font size if needed */
+}
+
+.chat-container {
+    max-width: 1200px; /* Increase this to make the entire container wider */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.chat-messages {
+    width: 100%; /* Make sure it takes up the full width of its container */
+    height: 400px; /* Adjust height as needed */
+    overflow-y: auto; /* Scroll if content overflows */
+    padding: 10px;
+    border: 1px solid #ccc; /* Optional: add border */
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px; /* Adjust font size as needed */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.chat-input {
+    display: flex;
+    width: 100%; /* Ensure the input section also uses the full width */
+}
+
+#message {
+    flex: 1; /* Takes up all available space */
+    margin-right: 10px; /* Optional: Add space between input and send button */
+    font-family: 'Manrope', sans-serif;
+}
+
+#sendButton, #clearButton {
+    font-family: 'Manrope', sans-serif;
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
