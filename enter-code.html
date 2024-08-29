@@ -3,30 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Mono&display=swap" rel="stylesheet">
     <title>Enter Code</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>Enter Code</h1>
-        <form id="codeForm">
-            <input type="text" id="codeInput" placeholder="Enter the code" required>
-            <button type="submit" style='font-family: "Manrope", sans-serif'>Submit Code</button>
-        </form>
+        <input type="text" id="codeInput" placeholder="Enter the code...">
+        <button id="codeSubmitButton">Submit</button>
     </div>
 
     <script>
-        document.getElementById('codeForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const code = document.getElementById('codeInput').value;
-            const correctCode = "5986"; // Replace with your code logic
+        document.getElementById('codeSubmitButton').addEventListener('click', function() {
+            const code = document.getElementById('codeInput').value.trim();
+            const correctCode = "5986"; // Replace this with your actual code
             if (code === correctCode) {
-                window.location.href = 'chat.html'; // Redirect to chat room if code is correct
+                window.location.href = 'chat.html'; // Redirect to the chatroom
             } else {
-                alert('Incorrect code. Please try again.');
+                alert("Incorrect code. Please try again.");
             }
         });
     </script>
