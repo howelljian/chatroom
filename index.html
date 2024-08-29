@@ -3,27 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Mono&display=swap" rel="stylesheet">
     <title>Enter Username</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>Enter Your Username</h1>
-        <form id="usernameForm">
-            <input type="text" id="usernameInput" placeholder="Enter your username" required>
-            <button type="submit" style='font-family: "Manrope", sans-serif'>Join Chat</button>
-        </form>
+        <input type="text" id="usernameInput" placeholder="Enter your username...">
+        <button id="submitButton">Submit</button>
     </div>
 
     <script>
-        document.getElementById('usernameForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const username = document.getElementById('usernameInput').value;
-            localStorage.setItem('username', username);
-            window.location.href = 'enter-code.html'; // Redirect to code entry page
+        document.getElementById('submitButton').addEventListener('click', function() {
+            const username = document.getElementById('usernameInput').value.trim();
+            if (username) {
+                localStorage.setItem('username', username);
+                window.location.href = 'enter-code.html'; // Redirect to the code entry page
+            }
         });
     </script>
 </body>
