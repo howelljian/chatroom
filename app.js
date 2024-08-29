@@ -50,9 +50,7 @@ function clearChatHistory() {
 function checkUser(username) {
     if (username === "howellissosmart") {
         document.getElementById('clearButton').style.display = 'block'; // Show button
-        document.getElementById('clearButton').style.display =  'font-family: "Manrope", sans-serif;'; // Show button
     } else {
-
         document.getElementById('clearButton').style.display = 'none'; // Hide button
     }
 }
@@ -75,8 +73,13 @@ document.getElementById('clearButton').addEventListener('click', () => {
 // Example usage: Send a message
 document.getElementById('sendButton').addEventListener('click', () => {
     const username = document.getElementById('username').value;
-    const message = document.getElementById('message').value;
-    sendMessage(username, message);
+    const message = document.getElementById('message').value.trim();
+    if (message) {
+        sendMessage(username, message);
+        document.getElementById('message').value = ''; // Clear the input field after sending
+        const messageList = document.getElementById('messageList');
+        messageList.scrollTop = messageList.scrollHeight; // Auto-scroll to the most recent message
+    }
 });
 
 // Example usage: Listen for new messages
@@ -89,4 +92,5 @@ listenForMessages((messages) => {
         messageElement.textContent = `${message.username}: ${message.message}`;
         messageList.appendChild(messageElement);
     }
+    messageList.scrollTop = messageList.scrollHeight; // Auto-scroll to the most recent message
 });
