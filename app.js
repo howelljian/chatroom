@@ -17,6 +17,9 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const chatRef = ref(db, 'chat');
 
+// Load the notification sound
+const notificationSound = new Audio('166740-Data-Beep-Notifier-Liquid_Echo.wav');
+
 // Function to send a message
 function sendMessage(username, message) {
     const newMessageRef = ref(db, 'chat/' + Date.now());
@@ -32,6 +35,9 @@ function listenForMessages(callback) {
     onValue(chatRef, (snapshot) => {
         const data = snapshot.val();
         callback(data);
+
+        // Play sound when a new message is received
+        notificationSound.play();
     });
 }
 
@@ -102,3 +108,4 @@ listenForMessages((messages) => {
         messageList.scrollTop = messageList.scrollHeight; // Auto-scroll to the most recent message
     }
 });
+
