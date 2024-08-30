@@ -17,22 +17,14 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const chatRef = ref(db, 'chat');
 
-// Load sound for notifications
-const notificationSound = new Audio('166740-Data-Beep-Notifier-Liquid_Echo.wav');
-
 // Function to send a message
 function sendMessage(username, message) {
-    if (message.trim() === '') return; // Prevent sending empty messages
-
     const newMessageRef = ref(db, 'chat/' + Date.now());
     set(newMessageRef, {
         username: username,
         message: message,
         timestamp: Date.now()
     });
-
-    // Clear the input field after sending a message
-    document.getElementById('message').value = '';
 }
 
 // Function to listen for new messages
@@ -41,17 +33,6 @@ function listenForMessages(callback) {
         const data = snapshot.val();
         callback(data);
     });
-}
-
-// Function to play notification sound
-function playNotificationSound() {
-    notificationSound.play();
-}
-
-// Function to auto-scroll to the most recent message
-function autoScroll() {
-    const messageList = document.getElementById('messageList');
-    messageList.scrollTop = messageList.scrollHeight;
 }
 
 // Function to clear chat history
@@ -89,31 +70,35 @@ document.getElementById('clearButton').addEventListener('click', () => {
     clearChatHistory();
 });
 
-// Example usage: Send a message
-document.getElementById('sendButton').addEventListener('click', () => {
+// Function to handle sending a message
+function handleSendMessage() {
     const username = document.getElementById('username').value;
     const message = document.getElementById('message').value;
+    if (message.trim() === '') return; // Prevent sending empty messages
     sendMessage(username, message);
+    document.getElementById('message').value = ''; // Clear message input
+}
+
+// Add event listener for the send button
+document.getElementById('sendButton').addEventListener('click', handleSendMessage);
+
+// Add event listener for Enter key press
+document.getElementById('message').addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent default Enter key behavior (e.g., form submission)
+        handleSendMessage(); // Call the function to send the message
+    }
 });
 
-// Listen for new messages
+// Example usage: Listen for new messages
 listenForMessages((messages) => {
     const messageList = document.getElementById('messageList');
-    const wasScrolledToBottom = messageList.scrollTop + messageList.clientHeight === messageList.scrollHeight;
-
     messageList.innerHTML = ''; // Clear existing messages
-
     for (let key in messages) {
         const message = messages[key];
         const messageElement = document.createElement('div');
         messageElement.textContent = `${message.username}: ${message.message}`;
-        messageElement.style.fontFamily = '"Manrope", sans-serif';
         messageList.appendChild(messageElement);
+        messageList.scrollTop = messageList.scrollHeight; // Auto-scroll to the most recent message
     }
-
-    if (!wasScrolledToBottom) {
-        playNotificationSound(); // Play sound if not at the bottom of the chat
-    }
-
-    autoScroll(); // Automatically scroll to the latest message
 });
